@@ -2,11 +2,17 @@ services:
   - docker
 
 before_install:
-  - docker build -t gladmo/caddy .
-  - docker run -d -p 127.0.0.1:80:4567 gladmo/caddy /bin/sh -c "ls /app"
+  - docker build -t ${DOCKER_REGISTRY} .
+  - docker run -d -p 127.0.0.1:80:80 gladmo/caddy /bin/sh -c "ls /app"
   - docker ps -a
   - docker images -a
   - docker version
+
+deploy:
+  provider: script
+  script: bash docker-push.sh
+  on:
+    branch: master
 
 script:
   - bundle exec rake test

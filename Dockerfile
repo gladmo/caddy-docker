@@ -17,7 +17,7 @@ ENV ACME_AGREE="true"
 RUN apk add --no-cache openssh-client git
 
 # install caddy
-COPY --from=builder /install/caddy /usr/bin/caddy
+COPY --from=pre-build /install/caddy /usr/bin/caddy
 COPY Caddyfile /etc/Caddyfile
 
 RUN /usr/bin/caddy -version
