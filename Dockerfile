@@ -20,9 +20,7 @@ COPY Caddyfile /etc/Caddyfile
 RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
 
-WORKDIR /app/webroot
-
-EXPOSE 8915
+EXPOSE 80 443
 
 ENTRYPOINT ["caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-port", "8915"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-port", "80"]
