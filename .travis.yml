@@ -2,10 +2,6 @@ services:
   - docker
 
 before_install:
-  - docker build -t ${DOCKER_REGISTRY} .
-  - docker run -d -p 127.0.0.1:80:80 gladmo/caddy /bin/sh -c "ls /app"
-  - docker ps -a
-  - docker images -a
   - echo ${DOCKER_REGISTRY}
 
 deploy:
@@ -13,3 +9,5 @@ deploy:
   script: bash docker-push.sh
   on:
     branch: master
+
+script: docker build -t ${DOCKER_REGISTRY} .
