@@ -1,7 +1,15 @@
 0.0.0.0
 
-browse
+log / /app/logs/access.log "{combined} {mitm}" {
+	rotate_size 100
+	rotate_age  30
+	rotate_keep 100
+	rotate_compress
+}
 
-log stdout
-
-errors stdout
+errors /app/logs/error.log {
+	rotate_size 100
+	rotate_age  30
+	rotate_keep 100
+	rotate_compress
+}

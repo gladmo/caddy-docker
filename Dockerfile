@@ -23,4 +23,4 @@ RUN /usr/bin/caddy -plugins
 WORKDIR /app
 
 ENTRYPOINT ["caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-root=/app", "-port", "80"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-root=/app/webroot", "-port", "80"]
