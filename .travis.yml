@@ -1,1 +1,11 @@
+services:
+  - docker
 
+before_install:
+  - docker build -t gladmo/caddy .
+  - docker run -d -p 127.0.0.1:80:4567 gladmo/caddy /bin/sh -c "ls /app"
+  - docker ps -a
+  - docker images -a
+
+script:
+  - bundle exec rake test
