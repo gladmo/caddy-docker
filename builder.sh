@@ -4,10 +4,9 @@ VERSION=${VERSION:-"0.11.1"}
 TELEMETRY=${ENABLE_TELEMETRY:-"true"}
 
 # caddy
-wget -q https://github.com/mholt/caddy/archive/v${VERSION}.tar.gz
-tar -zxf v${VERSION}.tar.gz
-mkdir -p /go/src/github.com/mholt/caddy
-mv caddy-${VERSION} /go/src/github.com/mholt/caddy
+git clone https://github.com/mholt/caddy -b "v$VERSION" /go/src/github.com/mholt/caddy \
+    && cd /go/src/github.com/mholt/caddy \
+    && git checkout -b "v$VERSION"
 
 # plugin helper
 GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
