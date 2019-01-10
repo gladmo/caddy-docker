@@ -11,9 +11,6 @@ RUN apk add --update --no-cache git gcc musl-dev && \
 # official
 FROM alpine:3.8
 
-# Let's Encrypt Agreement
-ENV ACME_AGREE="true"
-
 RUN apk add --no-cache openssh-client git
 
 # install caddy
@@ -26,4 +23,4 @@ RUN /usr/bin/caddy -plugins
 WORKDIR /app
 
 ENTRYPOINT ["caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE", "-root=/app"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-root=/app"]
