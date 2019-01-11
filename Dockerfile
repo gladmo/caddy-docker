@@ -11,16 +11,18 @@ RUN apk add --update --no-cache git gcc musl-dev && \
 # official
 FROM alpine:3.8
 
+ENV CADDYPATH /app/cert
+
 RUN apk add --no-cache openssh-client git
 
 # install caddy
 COPY --from=pre-build /install/caddy /usr/bin/caddy
-COPY Caddyfile /etc/Caddyfile
+COPY Caddyfile /app/caddy/Caddyfile
 
 RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
 
-EXPOSE 80 443
+WORKDIR /app
 
 ENTRYPOINT ["caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-port", "80"]
+CMD ["--conf", "/app/caddy/Caddyfile", "--log", "/app/logs/caddy.log", "--agree=true", "-root=/app/www"]
