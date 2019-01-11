@@ -73,6 +73,8 @@ package caddyhttp
 import _ "github.com/mholt/caddy/plugins/alidns"
 EOF
 
+go get -v "github.com/xenolf/lego/providers/dns/alidns"
+
 # plugins
 for plugin in $(echo $PLUGINS | tr "," " "); do \
     go get -v $(caddyplug package $plugin); \
@@ -85,8 +87,6 @@ git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/b
 
 # build
 cd /go/src/github.com/mholt/caddy/caddy \
-    && GO111MODULE=on go mod init \
-    && GO111MODULE=on go mod vendor -v \
     && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
     && mkdir -p /install \
     && mv caddy /install
