@@ -85,6 +85,8 @@ git clone https://github.com/caddyserver/builds /go/src/github.com/caddyserver/b
 
 # build
 cd /go/src/github.com/mholt/caddy/caddy \
+    && GO111MODULE=on go mod init
+    && GO111MODULE=on go mod vendor -v
     && GOOS=linux GOARCH=amd64 go run build.go -goos=$GOOS -goarch=$GOARCH -goarm=$GOARM \
     && mkdir -p /install \
     && mv caddy /install
