@@ -13,7 +13,7 @@ FROM alpine:3.8
 
 ENV CADDYPATH /app/cert
 
-RUN apk add --no-cache openssh-client git
+RUN apk add --no-cache openssh-client git tzdata
 
 # install caddy
 COPY --from=pre-build /install/caddy /usr/bin/caddy
