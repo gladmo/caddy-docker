@@ -31,7 +31,8 @@ fi
 
 # alidns
 # when pr merge, remove this
-cat /go/src/github.com/mholt/caddy/caddytls/alidns/alidns.go <<EOF
+mkdir /go/src/github.com/caddyserver/dnsproviders/alidns
+cat /go/src/github.com/caddyserver/dnsproviders/alidns/alidns.go <<EOF
 // alidns
 package alidns
 
@@ -67,7 +68,7 @@ func NewDNSProvider(credentials ...string) (caddytls.ChallengeProvider, error) {
 }
 EOF
 
-cat /go/src/github.com/mholt/caddy/caddytls/alidns.go <<EOF
+cat /go/src/github.com/caddyserver/dnsproviders/alidns.go <<EOF
 import _ "github.com/mholt/caddy/caddytls/alidns"
 EOF
 
